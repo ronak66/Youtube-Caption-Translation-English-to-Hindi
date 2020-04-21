@@ -57,23 +57,23 @@ class FeatureExtractor:
         self.clean_data()
         # prepare english tokenizer
         eng_tokenizer = self.create_tokenizer(self.l[:, 0])
-        eng_vocab_size = len(eng_tokenizer.word_index) + 1
-        eng_length = self.max_length(self.l[:, 0])
-        print('English Vocabulary Size: %d' % eng_vocab_size)
-        print('English Max Length: %d' % (eng_length))
+        self.eng_vocab_size = len(eng_tokenizer.word_index) + 1
+        self.eng_length = self.max_length(self.l[:, 0])
+        print('English Vocabulary Size: %d' % self.eng_vocab_size)
+        print('English Max Length: %d' % (self.eng_length))
         # prepare german tokenizer
         hindi_tokenizer = self.create_tokenizer(self.l[:, 1])
-        hindi_vocab_size = len(hindi_tokenizer.word_index) + 1
-        hindi_length = self.max_length(self.l[:, 1])
-        print('Hindi Vocabulary Size: %d' % hindi_vocab_size)
-        print('Hindi Max Length: %d' % (hindi_length))
-        trainX = self.encode_sequences(eng_tokenizer, eng_length, self.l[:train_length][:, 0])
-        trainY = self.encode_sequences(hindi_tokenizer, hindi_length, self.l[:train_length][:, 1])
-        trainY = self.encode_output(trainY, hindi_vocab_size)
+        self.hindi_vocab_size = len(hindi_tokenizer.word_index) + 1
+        self.hindi_length = self.max_length(self.l[:, 1])
+        print('Hindi Vocabulary Size: %d' % self.hindi_vocab_size)
+        print('Hindi Max Length: %d' % (self.hindi_length))
+        trainX = self.encode_sequences(eng_tokenizer, self.eng_length, self.l[:train_length][:, 0])
+        trainY = self.encode_sequences(hindi_tokenizer, self.hindi_length, self.l[:train_length][:, 1])
+        trainY = self.encode_output(trainY, self.hindi_vocab_size)
         # prepare validation data
-        testX = self.encode_sequences(eng_tokenizer, eng_length, self.l[train_length:][:, 0])
-        testY = self.encode_sequences(hindi_tokenizer, hindi_length, self.l[train_length:][:, 1])
-        testY = self.encode_output(testY, hindi_vocab_size)
+        testX = self.encode_sequences(eng_tokenizer, self.eng_length, self.l[train_length:][:, 0])
+        testY = self.encode_sequences(hindi_tokenizer, self.hindi_length, self.l[train_length:][:, 1])
+        testY = self.encode_output(testY, self.hindi_vocab_size)
         return (trainX,trainY,testX,testY,eng_tokenizer,hindi_tokenizer)
     
 
