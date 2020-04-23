@@ -5,7 +5,7 @@ It is advised to train the model on a better and a bigger dataset in-order to ge
 
 ### Steps
 
-1. Run the translate\_youtube\_captions.py code to get the caption and translate it to hindi.  
+1. Run the translate\_youtube\_captions.py code to get the caption and translate it to hindi. This will train the model on the provided dataset and generate predction using the obtained captions.  
 Note: Update the youtube video id in the code  
 ```
 $python3 translate_youtube_captions.py
