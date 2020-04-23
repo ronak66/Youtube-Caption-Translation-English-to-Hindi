@@ -61,7 +61,7 @@ class FeatureExtractor:
         self.eng_length = self.max_length(self.l[:, 0])
         print('English Vocabulary Size: %d' % self.eng_vocab_size)
         print('English Max Length: %d' % (self.eng_length))
-        # prepare german tokenizer
+        # prepare hindi tokenizer
         hindi_tokenizer = self.create_tokenizer(self.l[:, 1])
         self.hindi_vocab_size = len(hindi_tokenizer.word_index) + 1
         self.hindi_length = self.max_length(self.l[:, 1])
