@@ -1,6 +1,7 @@
 # English to Hindi Machine Translation
 
-Given a youtube id, gets the English captions and using a machine trasnlation model, converts these english captions to Hindi and feeds it back to the video.
+Given a youtube id, gets the English captions and using a machine trasnlation model, converts these english captions to Hindi and feeds it back to the video.  
+It is advised to train the model to a better and a bigger dataset in-order to get acceptable accuracy.
 
 ### Steps
 
