@@ -1,6 +1,7 @@
 # English to Hindi Machine Translation
 
-Given a youtube id, gets the English captions and using a machine trasnlation model, converts these english captions to Hindi and feeds it back to the video.
+Given a YouTube video id, collects the English captions and using a machine translation model, converts these english captions to Hindi and feeds it back to the video.  
+It is advised to train the model on a better and a bigger dataset in-order to get acceptable accuracy.
 
 ### Steps
 
@@ -10,8 +11,10 @@ Note: Update the youtube video id in the code
 $python3 translate_youtube_captions.py
 ```
 
+This will generate ```eng_to_hindi_translated_script.srt```
+
 2. Run update\_caption.py to update the captions back to the video.  
-Note: Update the "client\_secrets\_file", "videoId", "id: "YOUR\_CAPTION\_TRACK\_ID" variable for a succefull update  
+Note: Update the "client\_secrets\_file", "videoId", "id: "YOUR\_CAPTION\_TRACK\_ID" variable for a succefull update. Also provide the path to the ```eng_to_hindi_translated_script.srt``` in "YOUR_FILE" variable.
 ```
 $python3 update_caption.py
 ```
