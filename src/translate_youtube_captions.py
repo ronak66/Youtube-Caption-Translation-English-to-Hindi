@@ -1,6 +1,7 @@
 from model import EnglishToHindi
 from feature_extractor import FeatureExtractor
 
+import numpy as np
 from youtube_transcript_api import YouTubeTranscriptApi
 
 
@@ -8,7 +9,9 @@ if __name__ == '__main__':
 
     id1='liJVSwOiiwg'
     id2='ghYIKh9F5VE'
-    transcript=YouTubeTranscriptApi.get_transcript(id2,languages=['en'])
+    data_path = '../data/hin.txt'
+    
+    eng_transcript=YouTubeTranscriptApi.get_transcript(id2,languages=['en'])
 
     transcript_list = YouTubeTranscriptApi.list_transcripts(id2)
 
@@ -34,19 +37,18 @@ if __name__ == '__main__':
         # translating the transcript will return another transcript object
         print(transcript.translate('en').fetch())
 
-    
-    fe = FeatureExtractor()
+
+    fe = FeatureExtractor(data_path)
     train_length=2500
-    model = EnglishToHindi('../data/hin.txt',train_length)
-    model.fit(num_epochs=2)
+    model = EnglishToHindi(data_path,train_length)
+    model.fit(num_epochs=150)
     
     testy = []
-    for i in transcript:
+    for i in eng_transcript:
         testy.append([i['text'],'Hindi target unkown'])
     
     testX = fe.encode_sequences(model.eng_tokenizer, model.eng_length, np.array(testy)[:,0])
-    (_,predicted)=evaluate_model(testX,testy)
-    
+    (_,predicted)=model.evaluate_model(testX,testy)
     translation = ' '.join(predicted)
     
     file1 = open('eng_to_hindi_translated_script.srt',"w+")

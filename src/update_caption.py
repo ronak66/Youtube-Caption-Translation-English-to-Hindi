@@ -39,6 +39,7 @@ def main():
 
     request = youtube.captions().update(
         part="snippet",
+        sync=True,
         body={
           "id": "YOUR_CAPTION_TRACK_ID",
           "snippet": {

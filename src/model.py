@@ -4,7 +4,7 @@ from pickle import load
 import numpy as np
 from numpy import array
 
-from feature_extrator import FeatureExtractor
+from feature_extractor import FeatureExtractor
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -21,9 +21,9 @@ from keras.callbacks import ModelCheckpoint
 
 class EnglishToHindi:
 
-    def __init__(self,data_path):
+    def __init__(self,data_path,train_length=2500):
         fe = FeatureExtractor(data_path)
-        (self.trainX,self.trainY,self.testX,self.testY,self.eng_tokenizer,self.hindi_tokenizer) = fe.get_train_test_data()
+        (self.trainX,self.trainY,self.testX,self.testY,self.eng_tokenizer,self.hindi_tokenizer) = fe.get_train_test_data(train_length)
         self.l = fe.l
         self.eng_vocab_size = fe.eng_vocab_size
         self.hindi_vocab_size = fe.hindi_vocab_size
@@ -82,7 +82,7 @@ class EnglishToHindi:
             if i < 30:
                     print('src=[%s], target=[%s], predicted=[%s]' % (raw_src, raw_target, translation))
             actual.append([raw_target.split()])
-            predicted.append(translation.split())
+            predicted.append(translation)
 
         # calculate BLEU score
         #print('BLEU-1: %f' % corpus_bleu(actual, predicted, weights=(1.0, 0, 0, 0)))
